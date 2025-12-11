@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: fullstack-shop-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shop_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shop-network
+
+  # NestJS Backend
+  backend:
+    container_name: fullstack-shop-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: shop_db
+      JWT_SECRET: your-secret-key-change-in-production
+      PORT: 3001
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    networks:
+      - shop-network
+
+  # Next.js Frontend
+  frontend:
+    container_name: fullstack-shop-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    networks:
+      - shop-network
+
+volumes:
+  postgres_data:
+
+networks:
+  shop-network:
+    driver: bridge
