@@ -62,16 +62,16 @@ docker compose down
 
 ### ❌ Customers
 
-- [ ] Customer Entity (id, name, email, orderIds)
-- [ ] REST API (CRUD)
-- [ ] PostgreSQL Integration
-- [ ] Frontend: Customers anzeigen & Form
+- [x] Customer Entity (id, name, email, orderIds)
+- [x] REST API (CRUD)
+- [x] PostgreSQL Integration
+- [x] Frontend: Customers anzeigen & Form
 - [ ] Tests
 
 ### ❌ Authentication (JWT)
 
-- [ ] Password zu Customer Model hinzufügen
-- [ ] Password Hashing (bcrypt)
+- [x] Password zu Customer Model hinzufügen
+- [x] Password Hashing (bcrypt)
 - [ ] Login Endpoint
 - [ ] JWT Token Generation
 - [ ] Protected Routes (außer GET /products)
