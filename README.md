@@ -47,8 +47,9 @@ docker compose down
 - [x] Product Entity (id, name, description, price)
 - [x] REST API (GET, POST, PUT, DELETE)
 - [x] PostgreSQL Integration
-- [ ] Frontend: Products anzeigen
-- [ ] Frontend: Product Form (Create/Update)
+- [x] Frontend: Products anzeigen
+- [x] Frontend: Product Form (Create)
+- [ ] Frontend: Product Form (Update)
 - [ ] Tests (Frontend & Backend)
 
 ### ❌ Orders (Optional)
