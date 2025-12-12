@@ -1,0 +1,16 @@
+.navigation {
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: 500px;
+}
+
+.navigation a {
+  background: none;
+  color: var(--text-muted);
+}
+
+.navigation a:hover,
+.active {
+  color: var(--text) !important;
+}
