@@ -42,40 +42,39 @@ docker compose down
 - [x] CORS im Backend aktiviert
 - [x] Docker Compose Setup
 
-### ✅ Products (CRUD)
+### ❌ Products (CRUD)
 
 - [x] Product Entity (id, name, description, price)
 - [x] REST API (GET, POST, PUT, DELETE)
 - [x] PostgreSQL Integration
 - [x] Frontend: Products anzeigen
 - [x] Frontend: Product Form (Create)
-- [ ] Frontend: Product Form (Update)
 - [ ] Tests (Frontend & Backend)
 
 ### ❌ Orders (Optional)
 
-- [ ] Order Entity (id, productIds, totalPrice, customerId)
-- [ ] REST API (CRUD)
-- [ ] PostgreSQL Integration
-- [ ] Frontend: Orders anzeigen & Form
+- [x] Order Entity (id, productIds, totalPrice, customerId)
+- [x] REST API (CRUD)
+- [x] PostgreSQL Integration
+- [x] Frontend: Orders anzeigen & anlegen
 - [ ] Tests
 
 ### ❌ Customers
 
-- [x] Customer Entity (id, name, email, orderIds)
+- [x] Customer Entity (id, name, email, password)
 - [x] REST API (CRUD)
 - [x] PostgreSQL Integration
-- [x] Frontend: Customers anzeigen & Form
+- [x] Frontend: Customers anzeigen & anlegen
 - [ ] Tests
 
-### ❌ Authentication (JWT)
+### ✅ Authentication (JWT)
 
 - [x] Password zu Customer Model hinzufügen
 - [x] Password Hashing (bcrypt)
-- [ ] Login Endpoint
-- [ ] JWT Token Generation
-- [ ] Protected Routes (außer GET /products)
-- [ ] User kann nur eigene Daten verwalten
+- [x] Login Endpoint
+- [x] JWT Token Generation
+- [x] Protected Routes (außer GET /products)
+- [x] User kann nur eigene Daten verwalten
 
 ### ❌ Deployment (Bonus)
 

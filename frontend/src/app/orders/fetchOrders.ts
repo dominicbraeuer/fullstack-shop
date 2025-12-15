@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function fetchCustomers() {
+export async function fetchOrders() {
   // Server-side: use internal Docker network URL
   // Client-side: use public URL
   const apiUrl =
@@ -11,7 +11,7 @@ export async function fetchCustomers() {
   const cookieStore = await cookies();
   const token = cookieStore.get("access_token");
 
-  const response = await fetch(`${apiUrl}/customers`, {
+  const response = await fetch(`${apiUrl}/orders`, {
     cache: "no-store",
     credentials: "include",
     headers: {
@@ -20,9 +20,9 @@ export async function fetchCustomers() {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch customers");
+    throw new Error("Failed to fetch orders");
   }
 
-  const customers = await response.json();
-  return customers;
+  const orders = await response.json();
+  return orders;
 }

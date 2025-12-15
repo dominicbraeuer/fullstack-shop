@@ -2,9 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { getApiUrl, getAuthHeaders } from "@/lib/api";
 
-export default function CreateProductPage() {
+export default function LoginPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,27 +15,34 @@ export default function CreateProductPage() {
 
     const formData = new FormData(event.currentTarget);
     const data = {
-      name: formData.get("name") as string,
-      description: formData.get("description") as string,
-      price: parseFloat(formData.get("price") as string),
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
     };
 
     try {
-      const response = await fetch(`${getApiUrl()}/products`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         credentials: "include",
-        headers: getAuthHeaders(),
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create product");
+        throw new Error("Invalid credentials");
       }
 
+      const result = await response.json();
+
+      localStorage.setItem("customerId", result.customerId.toString());
+      localStorage.setItem("isAuthenticated", "true");
+
+      router.push("/");
       router.refresh();
-      router.push("/products");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -44,25 +50,21 @@ export default function CreateProductPage() {
 
   return (
     <>
-      <h1>Create New Product</h1>
+      <h1>Login</h1>
       {error && (
         <div style={{ color: "red", marginBottom: "1rem" }}>{error}</div>
       )}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" required />
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" required />
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
-          <textarea id="description" name="description" required></textarea>
-        </div>
-        <div>
-          <label htmlFor="price">Price (€):</label>
-          <input type="number" id="price" name="price" step="0.01" required />
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" required />
         </div>
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating..." : "Create Product"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </form>
     </>
