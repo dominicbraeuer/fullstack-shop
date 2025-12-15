@@ -13,17 +13,21 @@ export default async function ProductsPage() {
 
   return (
     <>
-      <h1>All Products</h1>
-      <Link href="/products/create">+ new product</Link>
-      <ul>
+      <div className={`page shadows`}>
+        <div className={`page_header`}>
+          <h1>All Products</h1>
+          <Link href="/products/create">+ new product</Link>
+        </div>
         {products.map((product: Product) => (
-          <li key={product.id}>
-            <h2>{product.name}</h2>
+          <div key={product.id} className={`card shadow-m`}>
+            <h2>
+              {product.id} | {product.name}
+            </h2>
             <p>{product.description}</p>
             <p>Price: {product.price} €</p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </>
   );
 }

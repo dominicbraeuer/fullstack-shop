@@ -7,6 +7,9 @@ import { ProductsModule } from './products/products.module';
 import { Product } from './products/entities/product.entity';
 import { CustomersModule } from './customers/customers.module';
 import { Customer } from './customers/entities/customer.entity';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,11 +23,13 @@ import { Customer } from './customers/entities/customer.entity';
       username: process.env.DATABASE_USER || 'postgres',
       password: process.env.DATABASE_PASSWORD || 'postgres',
       database: process.env.DATABASE_NAME || 'shop_db',
-      entities: [Product, Customer],
+      entities: [Product, Customer, Order],
       synchronize: true,
     }),
     ProductsModule,
     CustomersModule,
+    OrdersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

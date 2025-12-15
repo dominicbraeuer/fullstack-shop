@@ -10,7 +10,6 @@
   --button-secondary-border: #ebebeb;
 
   display: flex;
-  min-height: 100vh;
   align-items: start;
   justify-content: center;
   font-family: var(--font-geist-sans);
