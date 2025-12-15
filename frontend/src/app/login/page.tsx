@@ -34,10 +34,7 @@ export default function LoginPage() {
         throw new Error("Invalid credentials");
       }
 
-      const result = await response.json();
-
-      localStorage.setItem("customerId", result.customerId.toString());
-      localStorage.setItem("isAuthenticated", "true");
+      await response.json();
 
       router.push("/");
       router.refresh();

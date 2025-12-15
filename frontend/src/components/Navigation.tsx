@@ -11,9 +11,17 @@ export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      const isAuthenticated = localStorage.getItem("isAuthenticated");
-      setIsLoggedIn(!!isAuthenticated);
+    const checkAuth = async () => {
+      try {
+        const apiUrl =
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+        const response = await fetch(`${apiUrl}/customers`, {
+          credentials: "include",
+        });
+        setIsLoggedIn(response.ok);
+      } catch {
+        setIsLoggedIn(false);
+      }
     };
 
     checkAuth();
@@ -30,8 +38,6 @@ export default function Navigation() {
       console.error("Logout failed:", error);
     }
 
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("customerId");
     setIsLoggedIn(false);
     router.push("/");
     router.refresh();
