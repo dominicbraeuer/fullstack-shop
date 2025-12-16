@@ -47,23 +47,29 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1>Login</h1>
-      {error && (
-        <div style={{ color: "red", marginBottom: "1rem" }}>{error}</div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+      <div className={`page shadows`}>
+        <div className={`page_header`}>
+          <h1>Login</h1>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" required />
+        <div className={`form_container`}>
+          {error && (
+            <div style={{ color: "red", marginBottom: "1rem" }}>{error}</div>
+          )}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Logging in..." : "Login"}
+            </button>
+          </form>
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Logging in..." : "Login"}
-        </button>
-      </form>
+      </div>
     </>
   );
 }

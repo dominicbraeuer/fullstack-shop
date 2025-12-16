@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Put,
   Post,
   HttpCode,
@@ -32,14 +33,14 @@ export class ProductsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Product> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Product> {
     return this.productsService.findOne(id);
   }
 
   @Put(':id')
   @UseGuards(AuthGuard('jwt'))
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateProductDto: UpdateProductDto,
   ): Promise<Product> {
     return this.productsService.update(id, updateProductDto);
@@ -48,7 +49,7 @@ export class ProductsController {
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: number): Promise<void> {
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.productsService.remove(id);
   }
 }

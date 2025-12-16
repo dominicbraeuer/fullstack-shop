@@ -25,7 +25,8 @@ export default async function CustomersPage() {
             <h1>All Customers</h1>
           </div>
           <p>
-            Please <Link href="/login">log in</Link> to view your data.
+            Please <Link href="/login">log in</Link> or{" "}
+            <Link href="/customers/create">register</Link> to view your data.
           </p>
         </div>
       </>
