@@ -81,6 +81,10 @@ jobs:
         working-directory: ./frontend
         run: npm run lint
 
+      - name: Run tests
+        working-directory: ./frontend
+        run: npx playwright test
+
       - name: Build application
         working-directory: ./frontend
         run: npm run build
