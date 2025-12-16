@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Put,
   Post,
   HttpCode,
@@ -43,7 +44,7 @@ export class CustomersController {
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   async findOne(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<CustomerResponse> {
     if (id !== user.id) {
@@ -55,7 +56,7 @@ export class CustomersController {
   @Put(':id')
   @UseGuards(AuthGuard('jwt'))
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateCustomerDto: UpdateCustomerDto,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<CustomerResponse> {
@@ -69,7 +70,7 @@ export class CustomersController {
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<void> {
     if (id !== user.id) {

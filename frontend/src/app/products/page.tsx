@@ -21,7 +21,7 @@ export default async function ProductsPage() {
         {products.map((product: Product) => (
           <div key={product.id} className={`card shadow-m`}>
             <h2>
-              {product.id} | {product.name}
+              #{product.id} {product.name}
             </h2>
             <p>{product.description}</p>
             <p>Price: {product.price} €</p>

@@ -5,6 +5,7 @@ import {
   Body,
   Put,
   Param,
+  ParseIntPipe,
   Delete,
   HttpCode,
   HttpStatus,
@@ -38,7 +39,7 @@ export class OrdersController {
 
   @Get(':id')
   async findOne(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<Order> {
     return this.ordersService.findOne(id, user.id);
@@ -46,7 +47,7 @@ export class OrdersController {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateOrderDto: UpdateOrderDto,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<Order> {
@@ -56,7 +57,7 @@ export class OrdersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @GetUser() user: Omit<Customer, 'password'>,
   ): Promise<void> {
     return this.ordersService.remove(id, user.id);
